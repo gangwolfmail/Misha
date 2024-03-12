@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Letter</title>
+  </head>
+
+  <body>
+    <input type="checkbox" name="trigger" hidden id="trigger" />
+    <label for="trigger" class="container">
+      <div class="valentines">
+        <div class="envelope"></div>
+        <div class="image">
+          <img src="./OIP.jpg" alt="Logo" width="100" height="100" />
+        </div>
+        <div class="front"></div>
+        <div class="card">
+          <div class="text">
+            <br />Люба матуся<br />
+            з<br /><span class="green-text">8 Березня!</span>
+          </div>
+
+          <div class="flower"></div>
+          <div class="flowers">
+            <div class="one"><i class="material-icons">local_florist</i></div>
+            <div class="two"><i class="material-icons">local_florist</i></div>
+            <div class="three"><i class="material-icons">local_florist</i></div>
+            <div class="four"><i class="material-icons">local_florist</i></div>
+            <div class="five"><i class="material-icons">local_florist</i></div>
+          </div>
+        </div>
+      </div>
+      <div class="shadow"></div>
+    </label>
+
+    <footer class="footer-container">
+      <div id="modal-container">
+        <div class="modal-background">
+          <div class="modal">
+            <h2>Якимов Міша</h2>
+            <p>учень гр.ПШ-34</p>
+            <svg
+              class="modal-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              preserveAspectRatio="none"
+            >
+              <rect
+                x="0"
+                y="0"
+                fill="none"
+                width="226"
+                height="162"
+                rx="3"
+                ry="3"
+              ></rect>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="buttons">
+          <div id="one" class="button">Натисни мене!</div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector(".container");
+        const card = document.querySelector(".card");
+        const body = document.querySelector("body");
+
+        container.addEventListener("mouseenter", () => {
+          card.style.transition = "top 0.5s";
+          card.style.top = "-90px";
+        });
+
+        container.addEventListener("mouseleave", () => {
+          card.style.transition = "top 0.5s";
+          card.style.top = "0";
+        });
+
+        container.addEventListener("click", () => {
+          card.style.transition = "top 0.5s";
+          card.style.top = "-90px";
+        });
+
+        body.addEventListener(
+          "click",
+          () => {
+            card.style.transition = "top 0.5s";
+            card.style.top = "0";
+          },
+          true
+        );
+      });
+    </script>
+
+    <script>
+      $(".button").click(function () {
+        var buttonId = $(this).attr("id");
+        $("#modal-container").removeAttr("class").addClass(buttonId);
+        $("body").addClass("modal-active");
+      });
+
+      $("#modal-container").click(function () {
+        $(this).addClass("out");
+        $("body").removeClass("modal-active");
+      });
+    </script>
+  </body>
+</html>

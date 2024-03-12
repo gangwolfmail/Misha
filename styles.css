@@ -1,0 +1,858 @@
+@import url(./basic-styles.css);
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e1fcff;
+}
+
+.container {
+  position: relative;
+}
+
+.valentines {
+  position: relative;
+  top: 50px;
+  cursor: pointer;
+  animation: up 3s linear infinite;
+  margin-bottom: 50px;
+}
+
+@keyframes up {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background-color: #212d39;
+}
+
+.envelope:before {
+  background-color: #212d39;
+  content: "";
+  position: absolute;
+  width: 212px;
+  height: 212px;
+  transform: rotate(45deg);
+  top: -105px;
+  left: 44px;
+  border-radius: 30px 0 0 0;
+}
+
+.card {
+  position: absolute;
+  background-color: #fcdadd;
+  width: 270px;
+  height: 170px;
+  top: 5px;
+  left: 15px;
+  box-shadow: -5px -5px 100px rgba(0, 0, 0, 0.4);
+  transition: top 0.5s;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  border: 3px solid #fde7ea;
+  width: 240px;
+  height: 140px;
+  left: 12px;
+  top: 12px;
+}
+
+.image img {
+  position: absolute;
+  z-index: 9999;
+  max-width: 50px;
+  height: auto;
+  display: block;
+  margin: -80px 100px 10px 115px;
+}
+
+.text {
+  position: absolute;
+  font-family: "Satisfy", cursive;
+  font-size: 28px;
+  text-align: center;
+  line-height: 25px;
+  top: 25px;
+  left: 35px;
+  color: #161f27;
+}
+
+.green-text {
+  color: green;
+}
+
+.material-icons {
+  font-size: 48px;
+  color: #f35361;
+}
+
+.flowers > * {
+  position: absolute;
+  width: 25px; /* Ширина пелюстки зменшена в п'ять раз */
+  height: 25px; /* Висота пелюстки зменшена в п'ять раз */
+  background-color: #fef3f5;
+  border-radius: 30%;
+  top: 20%;
+  left: 50%;
+  transform-origin: bottom center;
+}
+
+.one {
+  left: 210px;
+  animation: flower 1.3s ease-out infinite;
+  transform: rotate(30deg);
+}
+
+.material-icons {
+  transform: rotate(45deg); /* Поворот іконки на 90 градусів */
+}
+
+.two {
+  left: 30px;
+  animation: flower 2s ease-out infinite;
+}
+
+.three {
+  left: 160px;
+  animation: flower 1.5s ease-out infinite;
+}
+
+.four {
+  left: 80px;
+  animation: flower 2.3s ease-out infinite;
+}
+
+.five {
+  left: 130px;
+  animation: flower 1.7s ease-out infinite;
+}
+
+@keyframes flower {
+  0% {
+    transform: translateY(0) rotate(-15deg) scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-170px) rotate(-45deg) scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+.front {
+  position: absolute;
+  border-right: 180px solid #2d3d4e;
+  border-top: 95px solid transparent;
+  border-bottom: 100px solid transparent;
+  left: 120px;
+  top: 5px;
+  width: 0;
+  height: 0;
+  z-index: 10;
+}
+
+.front:before {
+  position: absolute;
+  content: "";
+  border-left: 300px solid #34475b;
+  border-top: 195px solid transparent;
+  left: -120px;
+  top: -95px;
+  width: 0;
+  height: 0;
+}
+
+.shadow {
+  position: absolute;
+  width: 330px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 265px;
+  left: -15px;
+  animation: scale 3s linear infinite;
+  z-index: -1;
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.85);
+  }
+}
+
+@media (hover: hover) {
+  .container:hover .card {
+    top: -90px;
+  }
+}
+
+#trigger:checked ~ .container .card {
+  top: -90px;
+}
+
+/** ==========================================  */
+
+/*  {
+  box-sizing: border-box;
+} */
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: top center;
+  font-family: helvetica neue, helvetica, arial, sans-serif;
+  font-weight: 200;
+  &.modal-active {
+    overflow: hidden;
+  }
+}
+
+#modal-container {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 1;
+  &.one {
+    transform: scaleY(0.01) scaleX(0);
+    animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    .modal-background {
+      .modal {
+        transform: scale(0);
+        animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+    &.out {
+      transform: scale(1);
+      animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      .modal-background {
+        .modal {
+          animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+      }
+    }
+  }
+  &.two {
+    transform: scale(1);
+    .modal-background {
+      background: rgba(0, 0, 0, 0);
+      animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      .modal {
+        opacity: 0;
+        animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+    + .content {
+      animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+    &.out {
+      animation: quickScaleDown 0s 0.5s linear forwards;
+      .modal-background {
+        animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        .modal {
+          animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+      }
+      + .content {
+        animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+  }
+  &.three {
+    z-index: 0;
+    transform: scale(1);
+    .modal-background {
+      background: rgba(0, 0, 0, 0.6);
+      .modal {
+        animation: moveUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+    + .content {
+      z-index: 1;
+      animation: slideUpLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+    &.out {
+      .modal-background {
+        .modal {
+          animation: moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+      }
+      + .content {
+        animation: slideDownLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          forwards;
+      }
+    }
+  }
+  &.four {
+    z-index: 0;
+    transform: scale(1);
+    .modal-background {
+      background: rgba(0, 0, 0, 0.7);
+      .modal {
+        animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+    + .content {
+      z-index: 1;
+      animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+    &.out {
+      .modal-background {
+        .modal {
+          animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+            forwards;
+        }
+      }
+      + .content {
+        animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          forwards;
+      }
+    }
+  }
+  &.five {
+    transform: scale(1);
+    .modal-background {
+      background: rgba(0, 0, 0, 0);
+      animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      .modal {
+        transform: translateX(-1500px);
+        animation: roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+    }
+    &.out {
+      animation: quickScaleDown 0s 0.5s linear forwards;
+      .modal-background {
+        animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        .modal {
+          animation: roadRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+            forwards;
+        }
+      }
+    }
+  }
+  &.six {
+    transform: scale(1);
+    .modal-background {
+      background: rgba(0, 0, 0, 0);
+      animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      .modal {
+        background-color: transparent;
+        animation: modalFadeIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)
+          forwards;
+        h2,
+        p {
+          opacity: 0;
+          position: relative;
+          animation: modalContentFadeIn 0.5s 1s
+            cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        .modal-svg {
+          rect {
+            animation: sketchIn 0.5s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)
+              forwards;
+          }
+        }
+      }
+    }
+    &.out {
+      animation: quickScaleDown 0s 0.5s linear forwards;
+      .modal-background {
+        animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        .modal {
+          animation: modalFadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+            forwards;
+          h2,
+          p {
+            animation: modalContentFadeOut 0.5s
+              cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          }
+          .modal-svg {
+            rect {
+              animation: sketchOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+                forwards;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.seven {
+    transform: scale(1);
+    .modal-background {
+      background: rgba(0, 0, 0, 0);
+      animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      .modal {
+        height: 75px;
+        width: 75px;
+        border-radius: 75px;
+        overflow: hidden;
+        animation: bondJamesBond 1.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          forwards;
+        h2,
+        p {
+          opacity: 0;
+          position: relative;
+          animation: modalContentFadeIn 0.5s 1.4s linear forwards;
+        }
+      }
+    }
+    &.out {
+      animation: slowFade 0.5s 1.5s linear forwards;
+      .modal-background {
+        background-color: rgba(0, 0, 0, 0.7);
+        animation: fadeToRed 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        .modal {
+          border-radius: 3px;
+          height: 162px;
+          width: 227px;
+          animation: killShot 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          h2,
+          p {
+            animation: modalContentFadeOut 0.5s 0.5
+              cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+          }
+        }
+      }
+    }
+  }
+  .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+    .modal {
+      background: white;
+      padding: 50px;
+      display: inline-block;
+      border-radius: 3px;
+      font-weight: 300;
+      position: relative;
+      h2 {
+        font-size: 25px;
+        line-height: 25px;
+        margin-bottom: 15px;
+      }
+      p {
+        font-size: 18px;
+        line-height: 22px;
+      }
+      .modal-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 3px;
+        rect {
+          stroke: #fff;
+          stroke-width: 2px;
+          stroke-dasharray: 778;
+          stroke-dashoffset: 778;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  min-height: 100%;
+  height: 100%;
+  background: white;
+  position: relative;
+  z-index: 0;
+  h1 {
+    padding: 75px 0 30px 0;
+    text-align: center;
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  .buttons {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    background-color: #e1fcff;
+    .button {
+      display: inline-block;
+      text-align: center;
+      padding: 10px 15px;
+      margin: 10px;
+      background: red;
+      font-size: 18px;
+      background-color: #efefef;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      &:hover {
+        color: white;
+        background: #009bd5;
+      }
+    }
+  }
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.8) translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) translateY(1000px);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleBack {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.85);
+  }
+}
+
+@keyframes scaleForward {
+  0% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes quickScaleDown {
+  0% {
+    transform: scale(1);
+  }
+  99.9% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes slideUpLarge {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slideDownLarge {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(150px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(150px);
+  }
+}
+
+@keyframes blowUpContent {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  99.9% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes blowUpContentTwo {
+  0% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blowUpModal {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes blowUpModalTwo {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes roadRunnerIn {
+  0% {
+    transform: translateX(-1500px) skewX(30deg) scaleX(1.3);
+  }
+  70% {
+    transform: translateX(30px) skewX(0deg) scaleX(0.9);
+  }
+  100% {
+    transform: translateX(0px) skewX(0deg) scaleX(1);
+  }
+}
+
+@keyframes roadRunnerOut {
+  0% {
+    transform: translateX(0px) skewX(0deg) scaleX(1);
+  }
+  30% {
+    transform: translateX(-30px) skewX(-5deg) scaleX(0.9);
+  }
+  100% {
+    transform: translateX(1500px) skewX(30deg) scaleX(1.3);
+  }
+}
+
+@keyframes sketchIn {
+  0% {
+    stroke-dashoffset: 778;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sketchOut {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 778;
+  }
+}
+
+@keyframes modalFadeIn {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+@keyframes modalFadeOut {
+  0% {
+    background-color: white;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes modalContentFadeIn {
+  0% {
+    opacity: 0;
+    top: -20px;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+@keyframes modalContentFadeOut {
+  0% {
+    opacity: 1;
+    top: 0px;
+  }
+  100% {
+    opacity: 0;
+    top: -20px;
+  }
+}
+
+@keyframes bondJamesBond {
+  0% {
+    transform: translateX(1000px);
+  }
+  80% {
+    transform: translateX(0px);
+    border-radius: 75px;
+    height: 75px;
+    width: 75px;
+  }
+  90% {
+    border-radius: 3px;
+    height: 182px;
+    width: 247px;
+  }
+  100% {
+    border-radius: 3px;
+    height: 162px;
+    width: 227px;
+  }
+}
+
+@keyframes killShot {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeToRed {
+  0% {
+    background-color: rgba(black, 0.6);
+  }
+  100% {
+    background-color: rgba(red, 0.8);
+  }
+}
+
+@keyframes slowFade {
+  0% {
+    opacity: 1;
+  }
+  99.9% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+/* .footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+} */
+
+/* .buttons {
+  display: flex;
+  justify-content: center; 
+  padding: 20px 0; 
+} */
