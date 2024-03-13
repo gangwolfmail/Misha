@@ -17,7 +17,7 @@ body {
   top: 50px;
   cursor: pointer;
   animation: up 3s linear infinite;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 
 @keyframes up {
@@ -498,7 +498,7 @@ body {
       display: inline-block;
       text-align: center;
       padding: 10px 15px;
-      margin: 10px;
+      margin: 100px 0px;
       background: red;
       font-size: 18px;
       background-color: #efefef;

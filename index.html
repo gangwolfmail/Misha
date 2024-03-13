@@ -44,14 +44,13 @@
         </div>
       </div>
       <div class="shadow"></div>
-    </label>
 
-    <footer class="footer-container">
       <div id="modal-container">
         <div class="modal-background">
           <div class="modal">
             <h2>Якимов Міша</h2>
             <p>учень гр.ПШ-34</p>
+            <p>номінація: <span style="color: green">"Листівка"</span></p>
             <svg
               class="modal-svg"
               xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +76,8 @@
           <div id="one" class="button">Натисни мене!</div>
         </div>
       </div>
-    </footer>
+    </label>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const container = document.querySelector(".container");
@@ -120,6 +120,20 @@
       $("#modal-container").click(function () {
         $(this).addClass("out");
         $("body").removeClass("modal-active");
+      });
+    </script>
+
+    <script>
+      document.addEventListener("touchstart", function (e) {
+        const container = document.querySelector(".container");
+        const card = document.querySelector(".card");
+        if (e.target.closest(".container")) {
+          card.style.transition = "top 0.5s";
+          card.style.top = "-90px";
+        } else {
+          card.style.transition = "top 0.5s";
+          card.style.top = "0";
+        }
       });
     </script>
   </body>
